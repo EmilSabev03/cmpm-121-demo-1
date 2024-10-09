@@ -10,11 +10,11 @@ header.innerHTML = gameName;
 app.append(header);
 
 //add button to webpage
-const button = document.createElement('button');
+const button = document.createElement("button");
 
-button.innerHTML = '🍕';
+button.innerHTML = "🍕";
 app.appendChild(button);
 
-button.addEventListener('click', () => {
-  console.log('Button clicked');
+button.addEventListener("click", () => {
+  console.log("Button clicked");
 });
