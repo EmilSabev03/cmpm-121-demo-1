@@ -12,7 +12,7 @@ app.append(header);
 //add counter
 let counter: number = 0;
 
-//add div 
+//add div
 const div = document.createElement("div");
 div.innerHTML = `${counter} pizza slices`;
 app.appendChild(div);
@@ -20,20 +20,32 @@ app.appendChild(div);
 //add button to webpage
 const button = document.createElement("button");
 button.innerHTML = "🍕";
-app.appendChild(button); 
+app.appendChild(button);
+
+//function to format display of counter
+function formatDisplay(counter: number): string 
+{
+    if (counter === 1) 
+    {
+        return `${counter} pizza slice`;
+    } 
+    else 
+    {
+        return `${counter} pizza slices`;
+    }
+}
 
 //check if button is clicked
 button.addEventListener("click", () => 
 {
     //increase counter and use proper wording
     counter += 1;
-    if (counter == 1)
-    {
-        div.innerHTML = `${counter} pizza slice`;
-    }
-
-    else
-    {
-        div.innerHTML = `${counter} pizza slices`;
-    }
+    div.innerHTML = formatDisplay(counter);
 });
+
+//increase counter by 1 every second
+setInterval(() =>
+{
+    counter += 1;
+    div.innerHTML = formatDisplay(counter);
+}, 1000);
