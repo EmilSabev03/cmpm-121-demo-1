@@ -1,16 +1,29 @@
+/*
+credits:
+
+-ChatGPT and MDN helped with step 4: 
+https://chatgpt.com/share/6706d93f-51bc-8010-9158-6c8203fea11a
+https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+
+
+
+*/
+
+
 import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName = "Testing name change";
+const gameName = "Pizza clicker";
 document.title = gameName;
 
 const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-//add counter
+//add counter, lastTime, interval
 let counter: number = 0;
+let lastTime = performance.now();
 
 //add div
 const div = document.createElement("div");
@@ -23,29 +36,32 @@ button.innerHTML = "🍕";
 app.appendChild(button);
 
 //function to format display of counter
-function formatDisplay(counter: number): string 
-{
-    if (counter === 1) 
-    {
-        return `${counter} pizza slice`;
-    } 
-    else 
-    {
-        return `${counter} pizza slices`;
-    }
+function formatDisplay(counter: number): string {
+  if (counter === 1) {
+    return `${counter} pizza slice`;
+  } else {
+    return `${counter} pizza slices`;
+  }
 }
 
-//check if button is clicked
+//Increment counter once per second using frame count
+function update() 
+{
+    const time = performance.now();
+    const deltaTime = time - lastTime;
+    
+    counter += deltaTime / 1000;
+    div.innerHTML = formatDisplay(counter);
+    lastTime = time;
+  
+    requestAnimationFrame(update);
+}
+  
+requestAnimationFrame(update);
+  
+//check for button clicks
 button.addEventListener("click", () => 
 {
-    //increase counter and use proper wording
     counter += 1;
     div.innerHTML = formatDisplay(counter);
 });
-
-//increase counter by 1 every second
-setInterval(() =>
-{
-    counter += 1;
-    div.innerHTML = formatDisplay(counter);
-}, 1000);
