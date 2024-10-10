@@ -9,44 +9,47 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-
 //add counter, lastTime, growthRate, upgrade, priceGrowth values
 let counter: number = 0;
 let lastTime = performance.now();
 let growthRate: number = 0;
-let A = 0, B = 0, C = 0;
-let priceGrowthA = 1, priceGrowthB = 1, priceGrowthC = 1;
-
+let A = 0,
+  B = 0,
+  C = 0;
+let priceGrowthA = 1,
+  priceGrowthB = 1,
+  priceGrowthC = 1;
 
 //display amount of slices
 const div = document.createElement("div");
 div.innerHTML = `${counter} pizza slices`;
 app.appendChild(div);
 
-
 //display growth rate
 const growthRateDiv = document.createElement("div");
 growthRateDiv.innerHTML = `${growthRate.toFixed(1)} slices/sec`;
 app.appendChild(growthRateDiv);
 
-
 //add pizza clicker button to webpage
 const click = document.createElement("button");
-click.innerHTML = "🍕";
+const image = document.createElement("img");
+image.src = "assets/pnghq.com-pizza-slice-png-free-images-with-transparent-background.png"
+image.style.width = "200px";
+image.style.height = "200px";
+click.appendChild(image);
 app.appendChild(click);
-
+const lineBreak = document.createElement("br");
+app.appendChild(lineBreak);
 
 //add upgrade buttons to webpage
-const upgradeA = createUpgradeButton("A", true, app);
-const upgradeB = createUpgradeButton("B", true, app);
-const upgradeC = createUpgradeButton("C", true, app);
-
+const upgradeA = createUpgradeButton(`Extra Cheese<br>${10 * priceGrowthA}🍕`, true, app);
+const upgradeB = createUpgradeButton(`Pepperoni and Sausage<br>${100 * priceGrowthB}🍕`, true, app);
+const upgradeC = createUpgradeButton(`Golden Stove<br>${1000 * priceGrowthC}🍕`, true, app);
 
 //display upgrade count
-const amountUpgradeA = displayUpgradeCount("A", A, app);
-const amountUpgradeB = displayUpgradeCount("B", B, app);
-const amountUpgradeC = displayUpgradeCount("C", C, app);
-
+const amountUpgradeA = displayUpgradeCount("Extra Cheese", A, app);
+const amountUpgradeB = displayUpgradeCount("Pepperoni and Sausage", B, app);
+const amountUpgradeC = displayUpgradeCount("Golden Stove", C, app);
 
 //Function to simplify creating upgrade buttons
 function createUpgradeButton(
@@ -61,7 +64,6 @@ function createUpgradeButton(
   return upgradeX;
 }
 
-
 //Function to simplify display upgrade count
 function displayUpgradeCount(
   upgradeName: string,
@@ -73,7 +75,6 @@ function displayUpgradeCount(
   parentElement.appendChild(amountUpgradeX);
   return amountUpgradeX;
 }
-
 
 //Function to handle upgrades and updates
 function update() {
@@ -93,7 +94,6 @@ function update() {
 
 requestAnimationFrame(update);
 
-
 //Function to format the display
 const formatDisplay = (number: number): string => {
   if (number === 1) {
@@ -103,13 +103,11 @@ const formatDisplay = (number: number): string => {
   return Math.floor(number).toString() + " slices";
 };
 
-
 //Check for pizza button clicks
 click.addEventListener("click", () => {
   counter += 1;
   div.innerHTML = formatDisplay(counter);
 });
-
 
 //Check for upgrade button clicks
 upgradeA.addEventListener("click", () => {
@@ -119,7 +117,8 @@ upgradeA.addEventListener("click", () => {
   priceGrowthA *= 1.15;
   div.innerHTML = formatDisplay(counter);
   growthRateDiv.innerHTML = `${growthRate.toFixed(1)} slices/sec`;
-  amountUpgradeA.innerHTML = `A: ${A}`;
+  upgradeA.innerHTML = (`Extra Cheese<br>${(10 * priceGrowthA).toFixed(1)}🍕`);
+  amountUpgradeA.innerHTML = `Extra Cheese: ${A}`;
 });
 
 upgradeB.addEventListener("click", () => {
@@ -129,7 +128,8 @@ upgradeB.addEventListener("click", () => {
   priceGrowthB *= 1.15;
   div.innerHTML = formatDisplay(counter);
   growthRateDiv.innerHTML = `${growthRate.toFixed(1)} slices/sec`;
-  amountUpgradeB.innerHTML = `B: ${B}`;
+  upgradeB.innerHTML = (`Pepperoni and Sausage<br>${(100 * priceGrowthB).toFixed(1)}🍕`);
+  amountUpgradeB.innerHTML = `Pepperoni and Sausage: ${B}`;
 });
 
 upgradeC.addEventListener("click", () => {
@@ -139,5 +139,6 @@ upgradeC.addEventListener("click", () => {
   priceGrowthC *= 1.15;
   div.innerHTML = formatDisplay(counter);
   growthRateDiv.innerHTML = `${growthRate.toFixed(1)} slices/sec`;
-  amountUpgradeC.innerHTML = `C: ${C}`;
+  upgradeC.innerHTML = (`Golden Stove<br>${(1000 * priceGrowthC).toFixed(1)}🍕`);
+  amountUpgradeC.innerHTML = `Golden Stove: ${C}`;
 });

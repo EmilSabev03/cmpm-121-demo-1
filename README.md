@@ -14,3 +14,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/disabled
 
 -ChatGPT helped with step 6:
 https://chatgpt.com/share/67081daf-df2c-8010-9a7d-a24b27c88dd9
+
+-Used this pizza PNG for Step 8: 
+https://pnghq.com/pnghq-com-pizza-slice-png-free-images-with-transparent-background/
+
+-ChatGPT helped with step 8:
+https://chatgpt.com/share/67082b10-8d0c-8010-bdf4-29f1286ada5b
