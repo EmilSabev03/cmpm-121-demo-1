@@ -1,6 +1,6 @@
 Name: Emil Sabev  
 Assignment: D1.a: Incremental Game Development, Steps 1 to 5  
-Description: Short but functional pizza slice clicker game with upgrade
+Description: Short but functional pizza slice clicker game with upgrades
 
 Credits:
 
@@ -20,3 +20,10 @@ https://pnghq.com/pnghq-com-pizza-slice-png-free-images-with-transparent-backgro
 
 -ChatGPT helped with step 8:
 https://chatgpt.com/share/67082b10-8d0c-8010-bdf4-29f1286ada5b
+
+-Step 9/Step 10, used a lot of for loop + array refactoring. 
+Instead of declaring multiple variables for all the items, I used for loops + object arrays to declare variables. 
+Learned about it through sites like this: 
+
+https://graphite.dev/guides/typescript-for-loop
+https://www.geeksforgeeks.org/how-to-iterate-array-of-objects-in-typescript/

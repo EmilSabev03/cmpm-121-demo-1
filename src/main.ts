@@ -9,42 +9,39 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-
 //add Item interface
 interface Item {
-  name: string,
-  cost: number,
-  rate: number,
-  priceGrowth: number,
-  count: number,
-};
-
+  name: string;
+  description: string,
+  cost: number;
+  rate: number;
+  priceGrowth: number;
+  count: number;
+}
 
 //Add items
-const availableItems : Item[] = [
-  {name: "Extra Cheese", cost: 10, rate: 0.1, priceGrowth: 1, count: 0},
-  {name: "Pepperoni and Sausage", cost: 100, rate: 2, priceGrowth: 1, count: 0},
-  {name: "Golden Oven", cost: 1000, rate: 50, priceGrowth: 1, count: 0},
+const availableItems: Item[] = [
+  { name: "Extra Cheese",          description: "More cheese to your pizza",                    cost: 10,      rate: 0.1,   priceGrowth: 1, count: 0 },
+  { name: "Pepperoni and Sausage", description: "Adds meaty variety to your pizza",             cost: 100,     rate: 2,     priceGrowth: 1, count: 0,},
+  { name: "Golden Oven",           description: "The fastest pizza oven in the world",          cost: 1000,    rate: 50,    priceGrowth: 1, count: 0 },
+  { name: "Pizza Delivery",        description: "Deliver faster!",                              cost: 10000,   rate: 1500,  priceGrowth: 1, count: 0 },
+  { name: "Pizza Restaurant",      description: "Faster production in your own restaurant",     cost: 1000000, rate: 55000, priceGrowth: 1, count: 0 },
 ];
-
 
 //add counter, lastTime, growthRate, upgrade, priceGrowth values
 let counter: number = 0;
 let lastTime = performance.now();
 let growthRate: number = 0;
 
-
 //display amount of slices
 const div = document.createElement("div");
 div.innerHTML = `${counter} pizza slices`;
 app.appendChild(div);
 
-
 //display growth rate
 const growthRateDiv = document.createElement("div");
 growthRateDiv.innerHTML = `${growthRate.toFixed(1)} slices/sec`;
 app.appendChild(growthRateDiv);
-
 
 //add pizza clicker button to webpage
 const click = document.createElement("button");
@@ -58,30 +55,28 @@ app.appendChild(click);
 const lineBreak = document.createElement("br");
 app.appendChild(lineBreak);
 
-
 //add upgrade buttons to webpage
-const upgradeA = createUpgradeButton(
-  `Extra Cheese<br>${availableItems[0].cost * availableItems[0].priceGrowth}🍕`,
-  true,
-  app,
-);
-const upgradeB = createUpgradeButton(
-  `Pepperoni and Sausage<br>${availableItems[1].cost * availableItems[1].priceGrowth}🍕`,
-  true,
-  app,
-);
-const upgradeC = createUpgradeButton(
-  `Golden Stove<br>${availableItems[2].cost * availableItems[2].priceGrowth}🍕`,
-  true,
-  app,
-);
+const upgradeButtons: HTMLButtonElement[] = [];
 
+for (let i = 0; i < availableItems.length; i++)
+{
+  const item = availableItems[i];
+  const button = createUpgradeButton(`${item.name}<br>${item.description}<br>${item.cost * item.priceGrowth}🍕`,
+  true,
+  app,)
+  upgradeButtons.push(button);
+}
 
-//display upgrade count
-const amountUpgradeA = displayUpgradeCount("Extra Cheese", availableItems[0].count, app);
-const amountUpgradeB = displayUpgradeCount("Pepperoni and Sausage", availableItems[1].count, app);
-const amountUpgradeC = displayUpgradeCount("Golden Stove", availableItems[2].count, app);
+//add upgrade counts to webpage
+const upgradeCount: HTMLDivElement[] = [];
 
+for (let i = 0; i < availableItems.length; i++)
+{
+  const item = availableItems[i];
+  
+  const amount = displayUpgradeCount(item.name, item.count, app);
+  upgradeCount.push(amount);
+}
 
 //Check for pizza button clicks
 click.addEventListener("click", () => {
@@ -89,12 +84,11 @@ click.addEventListener("click", () => {
   div.innerHTML = formatDisplay(counter);
 });
 
-
-//Check for upgrade button clicks
-upgradeA.addEventListener("click", () => upgradeEventListener(upgradeA, 0, "Extra Cheese", amountUpgradeA));
-upgradeB.addEventListener("click", () => upgradeEventListener(upgradeB, 1, "Pepperoni and Sausage", amountUpgradeB));
-upgradeC.addEventListener("click", () => upgradeEventListener(upgradeC, 2, "Golden Stove", amountUpgradeC));
-
+//check for upgrade button clicks
+for (let i = 0; i < upgradeButtons.length; i++)
+{
+  upgradeButtons[i].addEventListener("click", () => upgradeEventListener(upgradeButtons[i], i, availableItems[i].name, upgradeCount[i]));
+}
 
 //Function to format the display
 const formatDisplay = (number: number): string => {
@@ -104,7 +98,6 @@ const formatDisplay = (number: number): string => {
 
   return Math.floor(number).toString() + " slices";
 };
-
 
 //Function to simplify creating upgrade buttons
 function createUpgradeButton(
@@ -119,7 +112,6 @@ function createUpgradeButton(
   return upgradeX;
 }
 
-
 //Function to simplify display upgrade count
 function displayUpgradeCount(
   upgradeName: string,
@@ -132,12 +124,13 @@ function displayUpgradeCount(
   return amountUpgradeX;
 }
 
-
 //Function to handle upgrades and updates
 function update() {
-  upgradeA.disabled = counter < availableItems[0].cost * availableItems[0].priceGrowth;
-  upgradeB.disabled = counter < availableItems[1].cost * availableItems[1].priceGrowth;
-  upgradeC.disabled = counter < availableItems[2].cost * availableItems[2].priceGrowth;
+
+  for (let i = 0; i < upgradeButtons.length; i++)
+  {
+    upgradeButtons[i].disabled = counter < availableItems[i].cost * availableItems[i].priceGrowth;
+  }
 
   const time = performance.now();
   const deltaTime = time - lastTime;
@@ -151,10 +144,13 @@ function update() {
 
 requestAnimationFrame(update);
 
-
 //Function to handle upgrade button clicks
-function upgradeEventListener(upgrade: HTMLElement, index: number, name: string, amountUpgrade: HTMLElement)
-{
+function upgradeEventListener(
+  upgrade: HTMLElement,
+  index: number,
+  name: string,
+  amountUpgrade: HTMLElement,
+) {
   availableItems[index].count += 1;
   counter -= availableItems[index].cost;
   growthRate += availableItems[index].rate;
@@ -162,6 +158,6 @@ function upgradeEventListener(upgrade: HTMLElement, index: number, name: string,
 
   div.innerHTML = formatDisplay(counter);
   growthRateDiv.innerHTML = `${growthRate.toFixed(1)} slices/sec`;
-  upgrade.innerHTML = `${name}<br>${(availableItems[index].cost * availableItems[index].priceGrowth).toFixed(1)}🍕`;
+  upgrade.innerHTML = `${name}<br>${availableItems[index].description}<br>${(availableItems[index].cost * availableItems[index].priceGrowth).toFixed(1)}🍕`;
   amountUpgrade.innerHTML = `${name}: ${availableItems[index].count}`;
 }
