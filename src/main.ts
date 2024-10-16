@@ -12,7 +12,7 @@ app.append(header);
 //add Item interface
 interface Item {
   name: string;
-  description: string,
+  description: string;
   cost: number;
   rate: number;
   priceGrowth: number;
@@ -21,11 +21,46 @@ interface Item {
 
 //Add items
 const availableItems: Item[] = [
-  { name: "Extra Cheese",          description: "More cheese to your pizza",                    cost: 10,      rate: 0.1,   priceGrowth: 1, count: 0 },
-  { name: "Pepperoni and Sausage", description: "Adds meaty variety to your pizza",             cost: 100,     rate: 2,     priceGrowth: 1, count: 0,},
-  { name: "Golden Oven",           description: "The fastest pizza oven in the world",          cost: 1000,    rate: 50,    priceGrowth: 1, count: 0 },
-  { name: "Pizza Delivery",        description: "Deliver faster!",                              cost: 10000,   rate: 1500,  priceGrowth: 1, count: 0 },
-  { name: "Pizza Restaurant",      description: "Faster production in your own restaurant",     cost: 1000000, rate: 55000, priceGrowth: 1, count: 0 },
+  {
+    name: "Extra Cheese",
+    description: "More cheese to your pizza",
+    cost: 10,
+    rate: 0.1,
+    priceGrowth: 1,
+    count: 0,
+  },
+  {
+    name: "Pepperoni and Sausage",
+    description: "Adds meaty variety to your pizza",
+    cost: 100,
+    rate: 2,
+    priceGrowth: 1,
+    count: 0,
+  },
+  {
+    name: "Golden Oven",
+    description: "The fastest pizza oven in the world",
+    cost: 1000,
+    rate: 50,
+    priceGrowth: 1,
+    count: 0,
+  },
+  {
+    name: "Pizza Delivery",
+    description: "Deliver faster!",
+    cost: 10000,
+    rate: 1500,
+    priceGrowth: 1,
+    count: 0,
+  },
+  {
+    name: "Pizza Restaurant",
+    description: "Faster production in your own restaurant",
+    cost: 1000000,
+    rate: 55000,
+    priceGrowth: 1,
+    count: 0,
+  },
 ];
 
 //add counter, lastTime, growthRate, upgrade, priceGrowth values
@@ -58,22 +93,22 @@ app.appendChild(lineBreak);
 //add upgrade buttons to webpage
 const upgradeButtons: HTMLButtonElement[] = [];
 
-for (let i = 0; i < availableItems.length; i++)
-{
+for (let i = 0; i < availableItems.length; i++) {
   const item = availableItems[i];
-  const button = createUpgradeButton(`${item.name}<br>${item.description}<br>${item.cost * item.priceGrowth}🍕`,
-  true,
-  app,)
+  const button = createUpgradeButton(
+    `${item.name}<br>${item.description}<br>${item.cost * item.priceGrowth}🍕`,
+    true,
+    app,
+  );
   upgradeButtons.push(button);
 }
 
 //add upgrade counts to webpage
 const upgradeCount: HTMLDivElement[] = [];
 
-for (let i = 0; i < availableItems.length; i++)
-{
+for (let i = 0; i < availableItems.length; i++) {
   const item = availableItems[i];
-  
+
   const amount = displayUpgradeCount(item.name, item.count, app);
   upgradeCount.push(amount);
 }
@@ -85,9 +120,15 @@ click.addEventListener("click", () => {
 });
 
 //check for upgrade button clicks
-for (let i = 0; i < upgradeButtons.length; i++)
-{
-  upgradeButtons[i].addEventListener("click", () => upgradeEventListener(upgradeButtons[i], i, availableItems[i].name, upgradeCount[i]));
+for (let i = 0; i < upgradeButtons.length; i++) {
+  upgradeButtons[i].addEventListener("click", () =>
+    upgradeEventListener(
+      upgradeButtons[i],
+      i,
+      availableItems[i].name,
+      upgradeCount[i],
+    ),
+  );
 }
 
 //Function to format the display
@@ -126,10 +167,9 @@ function displayUpgradeCount(
 
 //Function to handle upgrades and updates
 function update() {
-
-  for (let i = 0; i < upgradeButtons.length; i++)
-  {
-    upgradeButtons[i].disabled = counter < availableItems[i].cost * availableItems[i].priceGrowth;
+  for (let i = 0; i < upgradeButtons.length; i++) {
+    upgradeButtons[i].disabled =
+      counter < availableItems[i].cost * availableItems[i].priceGrowth;
   }
 
   const time = performance.now();
