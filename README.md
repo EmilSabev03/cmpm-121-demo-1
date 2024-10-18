@@ -5,11 +5,11 @@ Description: Short but functional pizza slice clicker game with upgrades
 Credits:
 
 -ChatGPT and MDN helped with step 4:  
-Prompted chatgpt to show me an example of requestAnimationFrame 
+Prompted chatgpt to show me an example of requestAnimationFrame
 https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
 
 -ChatGPT and MDN helped with step 5:  
-Prompted chatgpt to show me how to set up the button 
+Prompted chatgpt to show me how to set up the button
 https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/disabled
 
 -ChatGPT helped with step 6:

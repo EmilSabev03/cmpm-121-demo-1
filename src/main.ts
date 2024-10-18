@@ -82,7 +82,7 @@ app.appendChild(growthRateDiv);
 const click = document.createElement("button");
 const image = document.createElement("img");
 image.src =
-  "assets/pnghq.com-pizza-slice-png-free-images-with-transparent-background.png";
+  "./assets/pnghq.com-pizza-slice-png-free-images-with-transparent-background.png";
 image.style.width = "200px";
 image.style.height = "200px";
 click.appendChild(image);
