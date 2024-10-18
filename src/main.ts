@@ -80,11 +80,8 @@ app.appendChild(growthRateDiv);
 
 //add pizza clicker button to webpage
 const click = document.createElement("button");
-const image = document.createElement("img");
-image.src = "./src/pnghq.com-pizza-slice-png-free-images-with-transparent-background.png";
-image.style.width = "200px";
-image.style.height = "200px";
-click.appendChild(image);
+click.innerHTML = "🍕";
+click.style.fontSize = "100px";
 app.appendChild(click);
 const lineBreak = document.createElement("br");
 app.appendChild(lineBreak);
