@@ -31,7 +31,6 @@ const INITIAL_COUNT: number = 0;
 const INITIAL_COSTS: number[] = [10, 100, 1000, 10000, 1000000];
 const INITIAL_RATES: number[] = [0.1, 2, 50, 1500, 55000];
 
-
 //Add items
 const availableItems: Item[] = [
   {
@@ -76,7 +75,6 @@ const availableItems: Item[] = [
   },
 ];
 
-
 //display amount of slices
 const div = document.createElement("div");
 div.innerHTML = `${counter} pizza slices`;
@@ -97,44 +95,18 @@ app.appendChild(lineBreak);
 
 //add upgrade buttons to webpage
 const upgradeButtons: HTMLButtonElement[] = [];
-
-for (let i = 0; i < availableItems.length; i++) {
-  const item = availableItems[i];
-  const button = createUpgradeButton(
-    `${item.name}<br>${item.description}<br>${item.cost * item.priceGrowth}🍕`,
-    true,
-    app,
-  );
-  upgradeButtons.push(button);
-}
+addUpgradeButtons();
 
 //add upgrade counts to webpage
-const upgradeCount: HTMLDivElement[] = [];
+const upgradeCounts: HTMLDivElement[] = [];
+addUpgradeCounts();
 
-for (let i = 0; i < availableItems.length; i++) {
-  const item = availableItems[i];
-
-  const amount = displayUpgradeCount(item.name, item.count, app);
-  upgradeCount.push(amount);
-}
 
 //Check for pizza button clicks
 click.addEventListener("click", () => {
   counter += 1;
   div.innerHTML = formatDisplay(counter);
 });
-
-//check for upgrade button clicks
-for (let i = 0; i < upgradeButtons.length; i++) {
-  upgradeButtons[i].addEventListener("click", () =>
-    upgradeEventListener(
-      upgradeButtons[i],
-      i,
-      availableItems[i].name,
-      upgradeCount[i],
-    ),
-  );
-}
 
 //format the display
 const formatDisplay = (number: number): string => {
@@ -144,6 +116,20 @@ const formatDisplay = (number: number): string => {
 
   return Math.floor(number).toString() + " slices";
 };
+
+//check for upgrade button clicks
+for (let i = 0; i < upgradeButtons.length; i++) {
+  upgradeButtons[i].addEventListener("click", () =>
+    upgradeEventListener(
+      upgradeButtons[i],
+      i,
+      availableItems[i].name,
+      upgradeCounts[i],
+    ),
+  );
+}
+
+
 
 //Function to simplify creating upgrade buttons
 function createUpgradeButton(
@@ -159,7 +145,7 @@ function createUpgradeButton(
 }
 
 //Function to simplify display upgrade count
-function displayUpgradeCount(
+function displayUpgradeCounts(
   upgradeName: string,
   count: number,
   parentElement: HTMLElement,
@@ -211,3 +197,29 @@ function getDeltaTime(): number {
   lastTime = time;
   return deltaTime;
 }
+
+//function to add upgrade buttons to webpage
+function addUpgradeButtons()
+{
+  for (let i = 0; i < availableItems.length; i++) {
+    const item = availableItems[i];
+    const button = createUpgradeButton(
+      `${item.name}<br>${item.description}<br>${item.cost * item.priceGrowth}${PIZZA_EMOJI}`,
+      true,
+      app,
+    );
+    upgradeButtons.push(button);
+  }
+}
+
+//function to add upgrade counts to webpage
+function addUpgradeCounts()
+{
+  for (let i = 0; i < availableItems.length; i++) {
+    const item = availableItems[i];
+  
+    const amount = displayUpgradeCounts(item.name, item.count, app);
+    upgradeCounts.push(amount);
+  }
+}
+
