@@ -162,19 +162,17 @@ function displayUpgradeCount(
 }
 
 //Function to handle upgrades and updates
-function update() {
-  for (let i = 0; i < upgradeButtons.length; i++) {
-    upgradeButtons[i].disabled =
-      counter < availableItems[i].cost * availableItems[i].priceGrowth;
+function update() 
+{
+  for (let i = 0; i < upgradeButtons.length; i++) 
+  {
+    upgradeButtons[i].disabled = counter < availableItems[i].cost * availableItems[i].priceGrowth;
   }
 
-  const time = performance.now();
-  const deltaTime = time - lastTime;
-
+  const deltaTime = getDeltaTime();
   counter += growthRate * (deltaTime / 1000);
-  div.innerHTML = formatDisplay(counter);
-  lastTime = time;
 
+  div.innerHTML = formatDisplay(counter);
   requestAnimationFrame(update);
 }
 
@@ -196,4 +194,13 @@ function upgradeEventListener(
   growthRateDiv.innerHTML = `${growthRate.toFixed(1)} slices/sec`;
   upgrade.innerHTML = `${name}<br>${availableItems[index].description}<br>${(availableItems[index].cost * availableItems[index].priceGrowth).toFixed(1)}🍕`;
   amountUpgrade.innerHTML = `${name}: ${availableItems[index].count}`;
+}
+
+//function that calculates delta time for counter updates
+function getDeltaTime(): number
+{
+  const time = performance.now();
+  const deltaTime = time - lastTime;
+  lastTime = time;
+  return deltaTime;
 }
