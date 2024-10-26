@@ -162,11 +162,10 @@ function displayUpgradeCount(
 }
 
 //Function to handle upgrades and updates
-function update() 
-{
-  for (let i = 0; i < upgradeButtons.length; i++) 
-  {
-    upgradeButtons[i].disabled = counter < availableItems[i].cost * availableItems[i].priceGrowth;
+function update() {
+  for (let i = 0; i < upgradeButtons.length; i++) {
+    upgradeButtons[i].disabled =
+      counter < availableItems[i].cost * availableItems[i].priceGrowth;
   }
 
   const deltaTime = getDeltaTime();
@@ -197,8 +196,7 @@ function upgradeEventListener(
 }
 
 //function that calculates delta time for counter updates
-function getDeltaTime(): number
-{
+function getDeltaTime(): number {
   const time = performance.now();
   const deltaTime = time - lastTime;
   lastTime = time;
