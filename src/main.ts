@@ -19,54 +19,63 @@ interface Item {
   count: number;
 }
 
+//define global variables
+let counter: number = 0;
+let lastTime = performance.now();
+let growthRate: number = 0;
+
+//const storage values
+const PIZZA_EMOJI: string = "🍕";
+const INITIAL_PRICE_GROWTH: number = 1;
+const INITIAL_COUNT: number = 0;
+const INITIAL_COSTS: number[] = [10, 100, 1000, 10000, 1000000];
+const INITIAL_RATES: number[] = [0.1, 2, 50, 1500, 55000];
+
+
 //Add items
 const availableItems: Item[] = [
   {
     name: "Extra Cheese",
     description: "More cheese to your pizza",
-    cost: 10,
-    rate: 0.1,
-    priceGrowth: 1,
-    count: 0,
+    cost: INITIAL_COSTS[0],
+    rate: INITIAL_RATES[0],
+    priceGrowth: INITIAL_PRICE_GROWTH,
+    count: INITIAL_COUNT,
   },
   {
     name: "Pepperoni and Sausage",
     description: "Adds meaty variety to your pizza",
-    cost: 100,
-    rate: 2,
-    priceGrowth: 1,
-    count: 0,
+    cost: INITIAL_COSTS[1],
+    rate: INITIAL_RATES[1],
+    priceGrowth: INITIAL_PRICE_GROWTH,
+    count: INITIAL_COUNT,
   },
   {
     name: "Golden Oven",
     description: "The fastest pizza oven in the world",
-    cost: 1000,
-    rate: 50,
-    priceGrowth: 1,
-    count: 0,
+    cost: INITIAL_COSTS[2],
+    rate: INITIAL_RATES[2],
+    priceGrowth: INITIAL_PRICE_GROWTH,
+    count: INITIAL_COUNT,
   },
   {
     name: "Pizza Delivery",
     description: "Deliver faster!",
-    cost: 10000,
-    rate: 1500,
-    priceGrowth: 1,
-    count: 0,
+    cost: INITIAL_COSTS[3],
+    rate: INITIAL_RATES[3],
+    priceGrowth: INITIAL_PRICE_GROWTH,
+    count: INITIAL_COUNT,
   },
   {
     name: "Pizza Restaurant",
     description: "Faster production in your own restaurant",
-    cost: 1000000,
-    rate: 55000,
-    priceGrowth: 1,
-    count: 0,
+    cost: INITIAL_COSTS[4],
+    rate: INITIAL_RATES[4],
+    priceGrowth: INITIAL_PRICE_GROWTH,
+    count: INITIAL_COUNT,
   },
 ];
 
-//add counter, lastTime, growthRate, upgrade, priceGrowth values
-let counter: number = 0;
-let lastTime = performance.now();
-let growthRate: number = 0;
 
 //display amount of slices
 const div = document.createElement("div");
@@ -80,7 +89,7 @@ app.appendChild(growthRateDiv);
 
 //add pizza clicker button to webpage
 const click = document.createElement("button");
-click.innerHTML = "🍕";
+click.innerHTML = PIZZA_EMOJI;
 click.style.fontSize = "100px";
 app.appendChild(click);
 const lineBreak = document.createElement("br");
@@ -127,7 +136,7 @@ for (let i = 0; i < upgradeButtons.length; i++) {
   );
 }
 
-//Function to format the display
+//format the display
 const formatDisplay = (number: number): string => {
   if (number === 1) {
     return Math.floor(number).toString() + " slice";
@@ -191,7 +200,7 @@ function upgradeEventListener(
 
   div.innerHTML = formatDisplay(counter);
   growthRateDiv.innerHTML = `${growthRate.toFixed(1)} slices/sec`;
-  upgrade.innerHTML = `${name}<br>${availableItems[index].description}<br>${(availableItems[index].cost * availableItems[index].priceGrowth).toFixed(1)}🍕`;
+  upgrade.innerHTML = `${name}<br>${availableItems[index].description}<br>${(availableItems[index].cost * availableItems[index].priceGrowth).toFixed(1)}${PIZZA_EMOJI}`;
   amountUpgrade.innerHTML = `${name}: ${availableItems[index].count}`;
 }
 
