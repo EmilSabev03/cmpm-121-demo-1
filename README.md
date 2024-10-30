@@ -28,6 +28,10 @@ Learned about it through sites like this:
 https://graphite.dev/guides/typescript-for-loop
 https://www.geeksforgeeks.org/how-to-iterate-array-of-objects-in-typescript/
 
--D1.d First change: 
+-D1.d First change:
 Drew inspiration from Jackie's title bounce animation and modified it to so that my pizza clicker title sways up and down:
 https://jhuan280.github.io/cmpm-121-demo-1/
+
+-D1.d Second change:
+Drew inspiration from the button mashing game infinitely changing background, and modified it to use the pizza color palette:
+https://g4mer9.github.io/cmpm-121-demo-1/
