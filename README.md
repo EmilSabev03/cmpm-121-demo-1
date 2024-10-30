@@ -2,7 +2,7 @@ Name: Emil Sabev
 Assignment: D1.a: Incremental Game Development, Steps 1 to 5  
 Description: Short but functional pizza slice clicker game with upgrades
 
-Credits:
+Credits/Notes:
 
 -ChatGPT and MDN helped with step 4:  
 Prompted chatgpt to show me an example of requestAnimationFrame
@@ -27,3 +27,7 @@ Learned about it through sites like this:
 
 https://graphite.dev/guides/typescript-for-loop
 https://www.geeksforgeeks.org/how-to-iterate-array-of-objects-in-typescript/
+
+-D1.d First change: 
+Drew inspiration from Jackie's title bounce animation and modified it to so that my pizza clicker title sways up and down:
+https://jhuan280.github.io/cmpm-121-demo-1/

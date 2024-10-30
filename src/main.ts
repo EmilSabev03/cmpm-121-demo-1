@@ -3,9 +3,9 @@ import "./style.css";
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 //Display game name
+const header = document.createElement("h1");
 const gameName = "Pizza Clicker";
 document.title = gameName;
-const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
@@ -101,7 +101,6 @@ addUpgradeButtons();
 const upgradeCounts: HTMLDivElement[] = [];
 addUpgradeCounts();
 
-
 //Check for pizza button clicks
 click.addEventListener("click", () => {
   counter += 1;
@@ -128,8 +127,6 @@ for (let i = 0; i < upgradeButtons.length; i++) {
     ),
   );
 }
-
-
 
 //Function to simplify creating upgrade buttons
 function createUpgradeButton(
@@ -199,8 +196,7 @@ function getDeltaTime(): number {
 }
 
 //function to add upgrade buttons to webpage
-function addUpgradeButtons()
-{
+function addUpgradeButtons() {
   for (let i = 0; i < availableItems.length; i++) {
     const item = availableItems[i];
     const button = createUpgradeButton(
@@ -213,13 +209,11 @@ function addUpgradeButtons()
 }
 
 //function to add upgrade counts to webpage
-function addUpgradeCounts()
-{
+function addUpgradeCounts() {
   for (let i = 0; i < availableItems.length; i++) {
     const item = availableItems[i];
-  
+
     const amount = displayUpgradeCounts(item.name, item.count, app);
     upgradeCounts.push(amount);
   }
 }
-
